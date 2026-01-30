@@ -29,6 +29,7 @@ export default function Home() {
   } = useRaffleStore()
   const [nameInput, setNameInput] = useState("")
   const [prizeInput, setPrizeInput] = useState("")
+  const [showConsoleTitle, setShowConsoleTitle] = useState(true)
 
   const handleStart = () => {
     drawTen()
@@ -52,12 +53,29 @@ export default function Home() {
 
       <div className="relative z-10 flex h-screen w-full">
         <aside className="w-[340px] h-full glass-panel border-r border-white/5 flex flex-col gap-6 p-6 shrink-0 overflow-y-auto">
-          <div className="flex flex-col gap-2">
-            <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase">
-              iDOTOOLS
-            </span>
-            <h1 className="text-2xl font-bold tracking-tight">年会抽奖控制台</h1>
-            <p className="text-white/50 text-sm">名单、奖品与抽奖规则集中配置。</p>
+          <div className="flex items-center justify-between gap-3">
+            {showConsoleTitle ? (
+              <div className="flex flex-col gap-2">
+                <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase">
+                  iDOTOOLS
+                </span>
+                <h1 className="text-2xl font-bold tracking-tight">年会抽奖控制台</h1>
+                <p className="text-white/50 text-sm">名单、奖品与抽奖规则集中配置。</p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase">
+                  iDOTOOLS
+                </span>
+                <p className="text-white/40 text-xs">控制台标题已隐藏</p>
+              </div>
+            )}
+            <button
+              onClick={() => setShowConsoleTitle((prev) => !prev)}
+              className="rounded-full border border-white/10 px-3 py-2 text-xs text-white/60 hover:text-white hover:border-white/30 transition"
+            >
+              {showConsoleTitle ? "隐藏标题" : "显示标题"}
+            </button>
           </div>
 
           <nav className="flex flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-3">
