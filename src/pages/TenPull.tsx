@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { gsap } from "gsap"
-import { DrawSession, useRaffleStore } from "../store/raffleStore"
+import type { DrawSession } from "../store/raffleStore"
+import { useRaffleStore } from "../store/raffleStore"
 
 const rarityColor: Record<string, string> = {
   R: "text-[#ad92c9]",
@@ -95,7 +96,7 @@ export default function TenPull() {
 
         <main className="flex-1 flex items-center justify-center px-4 md:px-12 w-full max-w-[1600px] mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6 w-full pb-8">
-            {cards.map((card, index) => {
+            {cards.map((_, index) => {
               const isRevealed = revealed.includes(index)
               const data = session?.cards[index]
               const rarity = data?.rarity ?? "R"
