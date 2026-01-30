@@ -60,6 +60,28 @@ export default function Home() {
             <p className="text-white/50 text-sm">名单、奖品与抽奖规则集中配置。</p>
           </div>
 
+          <nav className="flex flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-3">
+            {[
+              { label: "抽奖主控", icon: "casino", active: true },
+              { label: "设置名单", icon: "group" },
+              { label: "导入奖品", icon: "gift" },
+              { label: "抽奖规则", icon: "rule" },
+              { label: "隐藏功能", icon: "auto_awesome" },
+            ].map((item) => (
+              <button
+                key={item.label}
+                className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition ${
+                  item.active
+                    ? "bg-primary/20 text-white shadow-[0_0_20px_rgba(127,19,236,0.35)]"
+                    : "text-white/60 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                <span className="material-symbols-outlined text-base">{item.icon}</span>
+                <span className="font-medium">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
           <section className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold tracking-wide">设置名单</h2>
@@ -198,35 +220,37 @@ export default function Home() {
         </aside>
 
         <main className="flex-1 relative flex flex-col items-center justify-center p-8 overflow-hidden">
-          <div className="absolute top-12 left-0 right-0 text-center z-20 flex flex-col items-center gap-2 animate-float">
+          <div className="absolute top-10 left-0 right-0 text-center z-20 flex flex-col items-center gap-3 animate-float">
             <div className="flex items-center gap-2 mb-1">
               <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold"></div>
-              <span className="text-gold text-xs font-bold tracking-[0.2em] uppercase">
+              <span className="text-gold text-xs font-bold tracking-[0.3em] uppercase">
                 年会限定
               </span>
               <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold"></div>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 drop-shadow-[0_0_25px_rgba(127,19,236,0.5)]">
+            <h2 className="text-6xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 drop-shadow-[0_0_35px_rgba(127,19,236,0.75)]">
               iDOTOOLS 年会抽奖
             </h2>
-            <p className="text-primary-glow/80 text-sm md:text-base font-normal tracking-wide max-w-lg">
+            <p className="text-primary-glow/90 text-base md:text-lg font-normal tracking-wide max-w-xl">
               让幸运之光聚焦舞台中央，开启十连抽卡般的心跳时刻。
             </p>
           </div>
 
-          <div className="relative size-[360px] md:size-[520px] flex items-center justify-center mt-[-40px]">
-            <div className="absolute inset-0 rounded-full border border-primary/30 animate-pulse-slow"></div>
+          <div className="relative size-[380px] md:size-[560px] flex items-center justify-center mt-[-40px]">
+            <div className="absolute inset-0 rounded-full border border-primary/30 pulse-strong"></div>
             <div
               className="absolute inset-4 rounded-full border border-dashed border-gold/20 animate-spin-slow"
               style={{ animationDuration: "60s" }}
             ></div>
-            <div className="relative size-[80%] rounded-full bg-black flex items-center justify-center overflow-hidden shadow-[0_0_100px_rgba(127,19,236,0.6)]">
+            <div className="relative size-[80%] rounded-full bg-black flex items-center justify-center overflow-hidden shadow-[0_0_130px_rgba(127,19,236,0.75)]">
               <div className="absolute inset-0 bg-portal-glow opacity-20 animate-spin-slow blur-3xl"></div>
               <div className="absolute inset-[4px] bg-[#0a0712] rounded-full overflow-hidden flex items-center justify-center z-10">
-                <div className="absolute w-1/3 h-1/3 rounded-full bg-primary blur-2xl animate-pulse"></div>
+                <div className="absolute w-1/3 h-1/3 rounded-full bg-primary blur-2xl pulse-strong"></div>
                 <div className="relative z-20 text-white/90 text-center">
-                  <div className="text-3xl font-bold">START</div>
-                  <div className="text-xs text-white/60 tracking-widest">TEN PULL</div>
+                  <div className="text-4xl md:text-5xl font-bold">START</div>
+                  <div className="text-sm md:text-base text-white/70 tracking-widest">
+                    TEN PULL
+                  </div>
                 </div>
               </div>
               <div className="absolute inset-0 border-[3px] border-primary/40 rounded-full z-20"></div>
@@ -243,7 +267,7 @@ export default function Home() {
           <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-6 z-30">
             <button
               onClick={handleStart}
-              className="group relative flex items-center justify-center min-w-[320px] h-16 bg-primary hover:bg-primary-glow text-white rounded-full transition-all duration-300 shadow-[0_0_40px_rgba(127,19,236,0.4)] hover:shadow-[0_0_60px_rgba(127,19,236,0.7)] hover:-translate-y-1 overflow-hidden"
+              className="group relative flex items-center justify-center min-w-[340px] h-[72px] bg-primary hover:bg-primary-glow text-white rounded-full transition-all duration-300 shadow-[0_0_55px_rgba(127,19,236,0.55)] hover:shadow-[0_0_90px_rgba(127,19,236,0.9)] hover:-translate-y-1 overflow-hidden pulse-strong"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
               <div className="relative flex items-center gap-3 px-8 z-10">
@@ -251,8 +275,10 @@ export default function Home() {
                   diamond
                 </span>
                 <div className="flex flex-col items-start">
-                  <span className="text-lg font-black tracking-wider leading-none">开启十连抽</span>
-                  <span className="text-xs font-medium text-white/80 leading-none mt-1">
+                  <span className="text-xl md:text-2xl font-black tracking-wider leading-none">
+                    开启十连抽
+                  </span>
+                  <span className="text-sm font-medium text-white/80 leading-none mt-2">
                     自动匹配 {rule.winnerCount} 名获奖者
                   </span>
                 </div>
