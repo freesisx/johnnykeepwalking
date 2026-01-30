@@ -30,6 +30,7 @@ export default function Home() {
   const [nameInput, setNameInput] = useState("")
   const [prizeInput, setPrizeInput] = useState("")
   const [showConsoleTitle, setShowConsoleTitle] = useState(true)
+  const [showSidebar, setShowSidebar] = useState(true)
 
   const handleStart = () => {
     drawTen()
@@ -52,8 +53,9 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 flex h-screen w-full">
-        <aside className="w-[340px] h-full glass-panel border-r border-white/5 flex flex-col gap-6 p-6 shrink-0 overflow-y-auto">
-          <div className="flex items-center justify-between gap-3">
+        {showSidebar && (
+          <aside className="w-[340px] h-full glass-panel border-r border-white/5 flex flex-col gap-6 p-6 shrink-0 overflow-y-auto">
+            <div className="flex items-center justify-between gap-3">
             {showConsoleTitle ? (
               <div className="flex flex-col gap-2">
                 <span className="text-primary text-xs font-bold tracking-[0.3em] uppercase">
@@ -70,15 +72,23 @@ export default function Home() {
                 <p className="text-white/40 text-xs">控制台标题已隐藏</p>
               </div>
             )}
-            <button
-              onClick={() => setShowConsoleTitle((prev) => !prev)}
-              className="rounded-full border border-white/10 px-3 py-2 text-xs text-white/60 hover:text-white hover:border-white/30 transition"
-            >
-              {showConsoleTitle ? "隐藏标题" : "显示标题"}
-            </button>
-          </div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => setShowConsoleTitle((prev) => !prev)}
+                  className="rounded-full border border-white/10 px-3 py-2 text-xs text-white/60 hover:text-white hover:border-white/30 transition"
+                >
+                  {showConsoleTitle ? "隐藏标题" : "显示标题"}
+                </button>
+                <button
+                  onClick={() => setShowSidebar(false)}
+                  className="rounded-full border border-white/10 px-3 py-2 text-xs text-white/60 hover:text-white hover:border-white/30 transition"
+                >
+                  隐藏侧栏
+                </button>
+              </div>
+            </div>
 
-          <nav className="flex flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-3">
+            <nav className="flex flex-col gap-2 rounded-2xl border border-white/5 bg-white/5 p-3">
             {[
               { label: "抽奖主控", icon: "casino", active: true },
               { label: "设置名单", icon: "group" },
@@ -98,9 +108,9 @@ export default function Home() {
                 <span className="font-medium">{item.label}</span>
               </button>
             ))}
-          </nav>
+            </nav>
 
-          <section className="flex flex-col gap-3">
+            <section className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold tracking-wide">设置名单</h2>
               <span className="text-xs text-white/40">人数 {participants.length}</span>
@@ -147,9 +157,9 @@ export default function Home() {
                 <span className="text-xs text-white/40">+{participants.length - 12}</span>
               )}
             </div>
-          </section>
+            </section>
 
-          <section className="flex flex-col gap-3">
+            <section className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-semibold tracking-wide">导入奖品</h2>
               <span className="text-xs text-white/40">奖品 {prizes.length}</span>
@@ -196,9 +206,9 @@ export default function Home() {
                 <span className="text-xs text-white/40">+{prizes.length - 8}</span>
               )}
             </div>
-          </section>
+            </section>
 
-          <section className="flex flex-col gap-3">
+            <section className="flex flex-col gap-3">
             <h2 className="text-sm font-semibold tracking-wide">抽奖规则设计</h2>
             <label className="text-xs text-white/50">奖项名称</label>
             <input
@@ -225,19 +235,28 @@ export default function Home() {
               />
               中奖者移除名单
             </label>
-          </section>
+            </section>
 
-          <div className="flex items-center gap-2 pt-2">
+            <div className="flex items-center gap-2 pt-2">
             <button
               onClick={resetAll}
               className="rounded-full border border-white/10 px-4 py-2 text-xs text-white/60 hover:text-white hover:border-white/30 transition"
             >
               清空配置
             </button>
-          </div>
-        </aside>
+            </div>
+          </aside>
+        )}
 
         <main className="flex-1 relative flex flex-col items-center justify-center p-8 overflow-hidden">
+          {!showSidebar && (
+            <button
+              onClick={() => setShowSidebar(true)}
+              className="absolute left-6 top-6 z-30 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs text-white/70 hover:text-white hover:border-white/40 transition"
+            >
+              显示侧栏
+            </button>
+          )}
           <div className="absolute top-10 left-0 right-0 text-center z-20 flex flex-col items-center gap-3 animate-float">
             <div className="flex items-center gap-2 mb-1">
               <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold"></div>
