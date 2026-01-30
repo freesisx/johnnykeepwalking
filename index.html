@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>星穹年会抽奖 | Cool Raffle</title>
+    <title>iDOTOOLS年会抽奖 | Cool Raffle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,65 +18,13 @@
 
     <header class="hero">
       <div class="hero__badge">2026 Company Annual Party</div>
-      <h1>星穹年会抽奖</h1>
+      <h1>iDOTOOLS年会抽奖</h1>
       <p>灯光、节拍、惊喜。下一位主角，可能就是你。</p>
     </header>
 
     <main class="layout">
-      <section class="panel panel--left">
-        <div class="panel__title">名单配置</div>
-        <div class="panel__block glass">
-          <label class="label" for="participantsInput">参与名单（每行/逗号分隔）</label>
-          <textarea
-            id="participantsInput"
-            placeholder="林小北\n赵青\n王哲, 李嘉\n..."
-            rows="8"
-          ></textarea>
-          <div class="actions">
-            <button class="btn btn--ghost" id="loadDemo">加载示例</button>
-            <button class="btn btn--ghost" id="saveList">保存名单</button>
-          </div>
-          <div class="meta">
-            <span>总人数：<strong id="totalCount">0</strong></span>
-            <span>剩余：<strong id="remainingCount">0</strong></span>
-          </div>
-        </div>
-
-        <div class="panel__block glass">
-          <div class="grid">
-            <div>
-              <label class="label" for="prizeInput">奖项名称</label>
-              <input id="prizeInput" type="text" placeholder="例如：最酷大奖" />
-            </div>
-            <div>
-              <label class="label" for="winnerCount">本轮人数</label>
-              <input id="winnerCount" type="number" min="1" max="30" value="1" />
-            </div>
-          </div>
-          <div class="toggles">
-            <label class="toggle">
-              <input id="removeToggle" type="checkbox" checked />
-              <span>自动移除中奖者</span>
-            </label>
-            <label class="toggle">
-              <input id="soundToggle" type="checkbox" checked />
-              <span>节奏脉冲音效</span>
-            </label>
-          </div>
-          <div class="actions">
-            <button class="btn btn--primary" id="drawBtn">开始抽奖</button>
-            <button class="btn btn--ghost" id="resetBtn">重置全部</button>
-          </div>
-        </div>
-
-        <div class="panel__block glass">
-          <div class="panel__subtitle">剩余名单</div>
-          <div class="chips" id="remainingList"></div>
-        </div>
-      </section>
-
-      <section class="panel panel--right">
-        <div class="stage glass">
+      <section class="stage-area">
+        <div class="stage glass stage--hero">
           <div class="stage__glow"></div>
           <div class="stage__label">实时滚动</div>
           <div class="stage__screen" id="stageScreen">
@@ -87,11 +35,70 @@
             <span id="stageStatus">等待抽奖</span>
           </div>
         </div>
-
-        <div class="panel__block glass">
-          <div class="panel__subtitle">中奖记录</div>
-          <div class="winner-list" id="winnerList"></div>
+        <div class="stage-actions">
+          <button class="btn btn--primary btn--xl" id="drawBtn">开始抽奖</button>
         </div>
+      </section>
+
+      <section class="lower-grid">
+        <section class="panel panel--left">
+          <div class="panel__title">名单配置</div>
+          <div class="panel__block glass">
+            <label class="label" for="participantsInput">参与名单（每行/逗号分隔）</label>
+            <textarea
+              id="participantsInput"
+              placeholder="林小北\n赵青\n王哲, 李嘉\n..."
+              rows="8"
+            ></textarea>
+            <div class="actions">
+              <button class="btn btn--ghost" id="loadDemo">加载示例</button>
+              <button class="btn btn--ghost" id="saveList">保存名单</button>
+            </div>
+            <div class="meta">
+              <span>总人数：<strong id="totalCount">0</strong></span>
+              <span>剩余：<strong id="remainingCount">0</strong></span>
+            </div>
+          </div>
+
+          <div class="panel__block glass">
+            <div class="grid">
+              <div>
+                <label class="label" for="prizeInput">奖项名称</label>
+                <input id="prizeInput" type="text" placeholder="例如：最酷大奖" />
+              </div>
+              <div>
+                <label class="label" for="winnerCount">本轮人数</label>
+                <input id="winnerCount" type="number" min="1" max="30" value="1" />
+              </div>
+            </div>
+            <div class="toggles">
+              <label class="toggle">
+                <input id="removeToggle" type="checkbox" checked />
+                <span>自动移除中奖者</span>
+              </label>
+              <label class="toggle">
+                <input id="soundToggle" type="checkbox" checked />
+                <span>节奏脉冲音效</span>
+              </label>
+            </div>
+            <div class="actions">
+              <button class="btn btn--ghost" id="resetBtn">重置全部</button>
+            </div>
+          </div>
+
+          <div class="panel__block glass">
+            <div class="panel__subtitle">剩余名单</div>
+            <div class="chips" id="remainingList"></div>
+          </div>
+        </section>
+
+        <section class="panel panel--right">
+          <div class="panel__title">中奖记录</div>
+          <div class="panel__block glass">
+            <div class="panel__subtitle">本轮&历史</div>
+            <div class="winner-list" id="winnerList"></div>
+          </div>
+        </section>
       </section>
     </main>
 

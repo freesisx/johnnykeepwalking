@@ -74,9 +74,9 @@ body {
 }
 
 .layout {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.1fr);
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
   padding: 24px 8vw 48px;
 }
 
@@ -183,6 +183,12 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.btn--xl {
+  padding: 14px 34px;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
 .meta {
   display: flex;
   justify-content: space-between;
@@ -224,6 +230,19 @@ textarea {
   overflow-y: auto;
 }
 
+.stage-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.stage-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .chip {
   padding: 6px 12px;
   border-radius: 999px;
@@ -241,6 +260,34 @@ textarea {
   flex-direction: column;
   justify-content: center;
   gap: 18px;
+}
+
+.stage--hero {
+  width: min(900px, 100%);
+  min-height: 320px;
+  border: 1px solid rgba(90, 242, 255, 0.45);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.stage--hero .stage__label {
+  font-size: 0.95rem;
+  letter-spacing: 4px;
+}
+
+.stage--hero .stage__screen {
+  min-height: 120px;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.stage--hero .stage__footer {
+  font-size: 1rem;
+}
+
+.lower-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.1fr) minmax(320px, 0.9fr);
+  gap: 28px;
+  align-items: start;
 }
 
 .stage__glow {
@@ -352,7 +399,7 @@ textarea {
 }
 
 @media (max-width: 1024px) {
-  .layout {
+  .lower-grid {
     grid-template-columns: 1fr;
   }
   .stage__footer {

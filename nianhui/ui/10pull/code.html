@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>十连抽结果 - 变体 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>.legendary-card {
+            box-shadow: 0 0 30px 10px rgba(127, 19, 236, 0.6), 0 0 60px 20px rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+        .legendary-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 2s infinite;
+        }
+        .shimmer-bg {
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+        }.mystery-card-back {
+            background: radial-gradient(circle at center, #2a2a3e 0%, #0d0d14 100%);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #554477;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0,0,0,0.8);
+        }
+        .mystery-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 20%, #0d0d14 100%),
+                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 2px, transparent 2px, transparent 12px),
+                repeating-linear-gradient(-45deg, rgba(255, 215, 0, 0.05) 0px, rgba(255, 215, 0, 0.05) 2px, transparent 2px, transparent 12px);
+            opacity: 0.8;
+        }
+        .mystery-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffd700 0%, #ff8c00 40%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(8px);
+            animation: core-pulse 3s ease-in-out infinite;
+        }
+        .mystery-rune {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: rgba(255, 215, 0, 0.8);
+            text-shadow: 0 0 10px #ffd700;
+            animation: spin-slow 12s linear infinite;
+        }
+        .mystery-border-decoration {
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 0.8rem;
+        }
+        .mystery-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #ffd700;
+            border-left: 2px solid #ffd700;
+        }
+        @keyframes core-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .particle {
+            position: absolute;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-fly 2s ease-out infinite;
+        }
+        @keyframes particle-fly {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col">
+<div class="fixed inset-0 z-0 bg-cover bg-center pointer-events-none" data-alt="Deep purple and blue cosmic nebula with twinkling stars" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOWaRyF5tyJuhU6A_lgrihwY8MmJxjlRpQL82BTw4qUUKXTkrRmbdXF_niDwexnpVRPqNciSZA-DI6TMfBADokczvOJGwyifC4sdM9fHCmsKlc3YG9248WQjGUcRbGqvdkDaAlMBrBVmPAsmRva0MBkYFhqRJE06fomIqDS0FhcVyOhqUbmE9jVdyEvrYoM0LUjVO46ulV3JQUN7RQVOJYBEI8jg2frBQDGd-yXZfgvQ3wazmtqMJ3T9WDfil5hKCdvNBPiP-E3LY');">
+<div class="absolute inset-0 bg-[#0a0510]/80 backdrop-blur-[2px]"></div>
+</div>
+<div class="relative z-10 flex flex-col h-screen overflow-hidden">
+<div class="flex-none px-8 py-6 flex justify-between items-center max-w-[1400px] w-full mx-auto">
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-[32px] font-bold tracking-tight leading-tight drop-shadow-lg">获得物品</h1>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#ffd700] text-sm">auto_awesome</span>
+<p class="text-[#ad92c9] text-sm font-medium">发现 1 件新传说物品！</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-3 bg-[#2d1b4e]/80 border border-[#4d3267] rounded-full px-4 py-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-[#ad92c9]">payments</span>
+<div class="flex flex-col leading-none">
+<span class="text-xs text-[#ad92c9] uppercase tracking-wider font-bold">信用点</span>
+<span class="text-white font-bold">4,500</span>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-[#2d1b4e]/80 border border-[#4d3267] rounded-full px-4 py-2 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary">diamond</span>
+<div class="flex flex-col leading-none">
+<span class="text-xs text-[#ad92c9] uppercase tracking-wider font-bold">星石</span>
+<span class="text-white font-bold">120</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex items-center justify-center px-4 md:px-12 w-full max-w-[1600px] mx-auto overflow-y-auto custom-scrollbar">
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6 w-full pb-8">
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Futuristic iron sword with glowing blue runes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDfHfHwNaIlYj0hI_ntrCUnMpuof4jwYFPPMb8AfhaVSv8DUqdBtVif8h4bHOiEKTt0mef1tceBNL8EZXXBpOwdS2Ltv2uNbohbxVtWrTeN2g_chvZRWpHTzsKMuLNchIjpeC2wCy_KcpKROKCXaqsLM60Ya-NQ_ncLJ55yw6AzStuhQ0zv1MHYEFToE_D7WaUZpU72kujAckSdN392v-yFCGzOnqpxD2LJj_CMmDjUqhR8DAb1VgOMaNMOhdq6e4aHXJiM5XgohFY');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">钢铁军刀</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Simple wooden shield with metal rim" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAC2e9i5CXlNdQ5H1zkcpdlEKbEgJRSsSBB3YmIkN2MQ0b3Dd1Wom5aTYCeBeYYamXOzzXQllYQEt0zaXeREaZjjN7f-xT_ryDcZDZcMWkLIm401drDzfcWOuXx52ieaWGMp1C7Sj6rVmRhL8qq-6G48HEZveE2G6iVSogc9UMSVO_vFmZsxgss9YNaoTKvZyPnehFNxEtRDzDwUqmlS2XMOvH3SCNvzjOh1XcFORjXIajni_tZQur8CaUBJG8ky4BLQ9v-GqDm9gI');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">侦察兵盾牌</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">SR</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Glowing blue potion bottle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7FFWaMgMPsjvlpMLe-sO6sGONNdiB6F8AY9r3KbyOVQBVf7IGdGfoNhaxZCYTetTuWRz0x8aLGp384ghoQj_sl1Db0IjRu4Ws7QMULkrxTqSSGRvQVLTZAEvs1Zfxf4ZeMHIFbqs7EfLepxguxMV7oYoCPIwamzSESZVOFaJrl59rYo1eTJsjYT9lSbjBUlJKOt7q7J9iazrAvO0wp-yzH2KqTQOlVWtB2tRXrB0YRSO-9HQXriY8ZFZ3mHJqWvUTZ7_VF_1V0X0');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">法力药剂</p>
+<div class="flex text-primary text-xs">
+<span class="material-symbols-outlined text-[12px]">star</span>
+<span class="material-symbols-outlined text-[12px]">star</span>
+<span class="material-symbols-outlined text-[12px]">star</span>
+</div>
+</div>
+</div>
+<div class="legendary-card group relative flex flex-col bg-gradient-to-br from-[#2d1b4e] to-[#000] rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 z-20 aspect-[2/3] animate-float">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-primary/60 mix-blend-overlay"></div>
+<div class="absolute top-2 right-2 bg-gradient-to-r from-yellow-600 to-yellow-400 rounded px-3 py-1 text-xs font-black text-black z-10 shadow-[0_0_10px_rgba(255,215,0,0.5)]">SSR</div>
+<div class="absolute top-2 left-2 bg-primary text-white rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest z-10 animate-pulse">新!</div>
+<div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Majestic female warrior with glowing wings and golden armor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBS3_Zy_RgKyrK8cHTkj9dETazvZHuXZxE0RASTwMNG7-w6Ll4yw1AeydutTUT9qixRlaThCOCs6_c_gRGxAVqWt6dgI6N8H9990PBI6Kg7_JWFZDaBvQ5jLwkGzC2oHvUG8awyIn25fBh19NXXnf3_uTFGpsp8GqAWdVRVpyFhRDVvRoFImyDGseGUxNbATv8De6yUs6eu24zCKIrC4gLq6I1T7n96gqLpQoj0pIVYbBW0MelRcvTzzdj2rippzFzWl5G4E2LPuas');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#2e0b57] via-transparent to-transparent"></div>
+</div>
+<span class="particle" style="top: 80%; left: 20%; width: 4px; height: 4px; --tx: 20px; --ty: -40px;"></span>
+<span class="particle" style="top: 70%; left: 80%; width: 3px; height: 3px; --tx: -10px; --ty: -30px; animation-delay: 0.5s;"></span>
+<span class="particle" style="top: 60%; left: 50%; width: 5px; height: 5px; --tx: 10px; --ty: -60px; animation-delay: 1s;"></span>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 to-transparent">
+<p class="text-[#ffd700] text-lg font-bold truncate drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">天界瓦隆</p>
+<div class="flex text-[#ffd700] text-sm gap-0.5">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Worn leather boots" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMtP4nRhzaVK-aIBY9uK0HkPfHE395mkBTPZox8t4tF_6va_4ukLzdpk4EpZlZnkbu_RJE2tEOBr0aDZCy_OhgeJSD6VvEgbzXmODwdgx0eZ44K1Ndff4nXDE3VjGIskjx1TXpla_TkMpJzhZHVDwV82SD-gN1D7Fl2ItNtoqjN1PV3tLOATZC9DIdDLfzVoGFxnqhj3bclsCtmHb4FkvOLa7jzm-hPsBE77TrfevTgHaVJLJ-B-GohSqHI1G3EQi0jyc8jH0a4r8');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">皮革护胫</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+<div class="mystery-card-back group relative flex flex-col rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(255,215,0,0.3)] aspect-[2/3] cursor-pointer">
+<div class="mystery-pattern"></div>
+<div class="mystery-border-decoration"></div>
+<div class="mystery-corner top-[10px] left-[10px]"></div>
+<div class="mystery-corner top-[10px] right-[10px] rotate-90"></div>
+<div class="mystery-corner bottom-[10px] right-[10px] rotate-180"></div>
+<div class="mystery-corner bottom-[10px] left-[10px] -rotate-90"></div>
+<div class="mystery-core"></div>
+<div class="mystery-rune material-symbols-outlined">filter_drama</div>
+<div class="absolute bottom-4 w-full text-center">
+<p class="text-[#ffd700] text-xs font-bold uppercase tracking-[0.2em] opacity-70 animate-pulse">点击揭示</p>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Rough copper ring with small stone" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC37trgAM4oHYLgh6lJEJ95klSyHnZ5-FtFDg-ePiows9BtthooZkJ9CE4TsWmNfGrN2nJxJAf9COPkQrohs_GTLquBvi9toZkzO47johoyUMGJ9ChOBmgTEp6q8QSeZUZM8yWDoNH9DqXDs8VEuKdNTBPcw7xV87HVZKX4T1qGNSG2RVkqokQ2oyRpGn-na1yqGqpERFwBgZbIacb-5QpnVIGRY_oDcILULEqCyGD70pPpgCZaNb35ilXvl_ADSLjNfG_dGYz7NEA');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">铜制指环</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">SR</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Hooded archer character portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4uM46MYhNFKe0KBqH8BoWrtcv8iF7rD840n4ImrIaSp0gyU23C17B7oxDOnIazWWqinEdVPLJGjGEwx0t_NCIiTtMLPnm2moOaK3J5wmvGyTjn899eaI3MIuZ9SK8LnnMFKSiumRAhSo3Wrdnetpo88ICE-MVP91TDEBU_TsOKUdadlG8z5zxzStc_MYZZgKrHGWYV9q0YsazejvTgu0iIyX0k1OPDrnKOdJHfweCQ4qBm8ZdZkCx6ZVfzipuvpljs1uwSpLR1IQ');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">游侠凯尔</p>
+<div class="flex text-primary text-xs">
+<span class="material-symbols-outlined text-[12px]">star</span>
+<span class="material-symbols-outlined text-[12px]">star</span>
+<span class="material-symbols-outlined text-[12px]">star</span>
+<span class="material-symbols-outlined text-[12px]">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Iron helmet with dents" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-Ut6NAJfaKD_xYjRMBdLzB0otrhYYygP9DM-wsvdPw2djgxn7R_6CS4BvNyqspwV2_Cfc28jvyzB2H449kNcKozduGlm0zhvBWkhXRwh9iFjDdgPD_j3W32qIIMUrmRHiBJi0il_kveSMrdj1pbaVHNT59U157OW2BKZY3JiFqyKq3GxCLy0fEFHjAzDa2Cmnpz_jPWWqvLX3niWX15TgEKXy7Q_lM3kBiZiwW2b6A69xfLh0VckTQNGQz72iTpeaY-D2G0DVdpw');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">士兵头盔</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col bg-[#1a1122]/90 hover:bg-[#2d1b4e] border border-[#4d3267] hover:border-[#ad92c9] rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl aspect-[2/3]">
+<div class="absolute top-2 right-2 bg-black/60 rounded px-2 py-0.5 text-xs font-bold text-[#ad92c9] z-10 backdrop-blur-sm">R</div>
+<div class="h-full w-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="Scroll with magic runes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBPXidSTGNDxhvUvWG-U1xuzVN1qYdU25afIVCN4BBgytUEed2UixS7VlFy1lQ87Fe-rMhhASSA91-CZSkQEtxVOrqoAlxWLkBQI7bvAdaWyL9qcTyjH9PhQ78NLAdjApj-ikR0DJeKeJQFoso15s0zu200fPVsyvJZMf1yzD3E0O_jbMGgDlKWvrNRu4ETDV9W925rTsOU_9j29OcJ0wV_laiWyM8kUrbNcMO68pM54gOnt0va2v5jE4rEn8YsUCRiAYsoTOmg30');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1122] via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4">
+<p class="text-white text-sm font-bold truncate">奥术卷轴</p>
+<div class="flex text-[#ad92c9] text-xs">
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+<span class="material-symbols-outlined text-[12px] text-[#ad92c9]">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-none px-4 pb-8 flex justify-center w-full relative z-20">
+<div class="bg-[#1a0b2e]/90 backdrop-blur-xl border border-[#4d3267] rounded-full p-2 pl-6 pr-2 flex items-center gap-6 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center">
+<p class="text-[#ad92c9] text-xs font-medium uppercase tracking-wider">剩余次数</p>
+<p class="text-white text-lg font-bold leading-none">2<span class="text-[#ad92c9] text-sm ml-1">/ 10</span></p>
+</div>
+<div class="h-8 w-px bg-[#4d3267]"></div>
+<div class="flex gap-3">
+<button class="group flex items-center justify-center h-12 px-6 rounded-full border border-[#4d3267] bg-transparent hover:bg-[#362348] text-[#ad92c9] hover:text-white transition-all duration-200">
+<span class="text-sm font-bold tracking-wide group-hover:translate-x-0.5 transition-transform">跳过</span>
+</button>
+<button class="relative overflow-hidden flex items-center justify-center h-12 px-8 rounded-full bg-primary hover:bg-[#680ec2] text-white shadow-[0_0_20px_rgba(127,19,236,0.4)] hover:shadow-[0_0_30px_rgba(127,19,236,0.6)] transition-all duration-200">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:animate-shine"></div>
+<span class="material-symbols-outlined text-lg mr-2">check</span>
+<span class="text-base font-bold tracking-wide">确定</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
